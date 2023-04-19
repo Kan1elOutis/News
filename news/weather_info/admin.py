@@ -14,6 +14,7 @@ class WeatherResource(ModelResource):
 @admin.register(Weather)
 class WeatherAdmin(ImportExportActionModelAdmin, ModelAdmin):
     resource_class = WeatherResource
-    list_display = ('temperature', 'pressure', 'windy_speed', 'place')
-    fields = ('place', 'temperature', 'pressure', 'windy_speed',)
-    readonly_fields = ['temperature', 'pressure', 'windy_speed', 'place']
+    list_display = ('temperature', 'pressure', 'windy_speed', 'place', 'date')
+    fields = ('place', 'temperature', 'pressure', 'windy_speed', 'date')
+    readonly_fields = ['temperature', 'pressure', 'windy_speed', 'place', 'date']
+    list_filter = ['place', 'date']

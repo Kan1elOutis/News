@@ -16,11 +16,10 @@ Including another URLconf
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import include, path
 from rest_framework.routers import SimpleRouter
 
-from newspaper.views import NewsViewSet, ContactView, send_email
-
+from newspaper.views import ContactView, NewsViewSet
 from weather_info.views import WeatherViewSet
 
 router = SimpleRouter()
@@ -29,12 +28,13 @@ router.register(r'news', NewsViewSet)
 
 router.register(r'weather', WeatherViewSet)
 
+router.register(r'send', ContactView)
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('summernote/', include('django_summernote.urls')),
     path('auth/', include('djoser.urls')),
     path('auth/', include('djoser.urls.authtoken')),
-    path('send/', send_email),
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 urlpatterns += router.urls

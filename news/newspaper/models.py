@@ -17,11 +17,12 @@ class News(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.make_thumbnail():
-            raise Exception('Could not create thumbnail - is the file type valid?')
+            raise Exception('Невозможно создать превью - проверьте расширение файла')
 
         super(News, self).save(*args, **kwargs)
 
     def make_thumbnail(self):
+        """Function for create thumbnail of main image"""
         image = Image.open(self.main_image)
         image.thumbnail((200, 200))
 

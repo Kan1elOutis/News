@@ -1,17 +1,13 @@
 import os
 
 import requests
-from django.shortcuts import redirect
 from djoser import permissions
-
 from rest_framework import status
 from rest_framework.decorators import action
-from rest_framework.mixins import CreateModelMixin
 from rest_framework.response import Response
-from rest_framework.viewsets import ModelViewSet, GenericViewSet
+from rest_framework.viewsets import ModelViewSet
 
 from notable_places.models import Place
-from weather_info.models import Weather
 from weather_info.serializers import WeatherSerializers
 
 
