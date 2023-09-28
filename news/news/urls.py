@@ -19,7 +19,7 @@ from django.contrib import admin
 from django.urls import include, path
 from rest_framework.routers import SimpleRouter
 
-from newspaper.views import ContactView, NewsViewSet
+from newspaper.views import  NewsViewSet
 from weather_info.views import WeatherViewSet
 
 router = SimpleRouter()
@@ -28,7 +28,6 @@ router.register(r'news', NewsViewSet)
 
 router.register(r'weather', WeatherViewSet)
 
-router.register(r'send', ContactView)
 
 urlpatterns = [
     path('admin/', admin.site.urls),

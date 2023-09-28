@@ -14,12 +14,6 @@ class NewsViewSet(ModelViewSet):
     serializer_class = NewsSerializers
     permission_classes = [permissions.permissions.IsAuthenticated]
 
-
-class ContactView(ModelViewSet):
-    queryset = News.objects.all()
-    serializer_class = NewsSerializers
-    permission_classes = [permissions.permissions.IsAuthenticated]
-
     @action(methods=["get"], url_path='send-email', detail=False)
     def file_info(self, request):
         send_email_every_1day.delay()
