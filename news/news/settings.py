@@ -25,7 +25,11 @@ SECRET_KEY = 'django-insecure-$098vbae6wb_=h8xhqz*(g1vnbb3(5ql=kd1roga_u4r9bu@s=
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
+
+INTERNAL_IPS = [
+    "127.0.0.1",
+]
 
 # Application definition
 
@@ -44,6 +48,7 @@ INSTALLED_APPS = [
     'import_export',
     'django_admin_geomap',
     'constance',
+    'django_celery_results',
 
     'newspaper',
     'notable_places',
@@ -128,8 +133,10 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+MEDIA_ROOT = 'media/'
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
@@ -167,10 +174,22 @@ DJOSER = {
 # Redis settings
 
 CELERY_BROKER_URL = os.environ.get(
-    'CELERY_BROKER_URL', 'redis://127.0.0.1:6379/15'
+    'CELERY_BROKER_URL', 'redis://redis:6379/15'
 )
-CELERY_RESULT_BACKEND = os.environ.get(
-    'CELERY_RESULT_BACKEND', 'redis://127.0.0.1:6379/15'
+CELERY_BACKEND_RESULT = os.environ.get(
+    'CELERY_BACKEND_RESULT', 'redis://redis:6379/15'
 )
-CELERY_TASK_SERIALIZER = 'json'
+CELERY_SERIALIZER = 'json'
 CELERY_ACCEPT_CONTENT = ['application/json']
+
+# Constance
+
+CONSTANCE_IGNORE_ADMIN_VERSION_CHECK = True
+
+CONSTANCE_CONFIG = {
+    'WEATHER_GET_HOUR': ('0', 'weather get hour'),
+    'WEATHER_GET_MINUTES': ('0', 'weather get minutes'),
+    'EMAIL_SEND_HOUR': ('1', 'email hour'),
+    'EMAIL_SEND_MINUTES': ('0', 'email minutes'),
+
+}

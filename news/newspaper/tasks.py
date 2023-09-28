@@ -22,15 +22,15 @@ def send_email_every_1day(user_email):
 
 @app.task
 def send_beat_email():
-    for news in News.objects.all():
-        if news.public_date == datetime.today().date():
-            for user in User.objects.all():
-                send_mail(news.header,
-                          news.description,
-                          'SibDoski-server@yandex.ru',
-                          [user.email],
-                          fail_silently=False,
-                          )
+    for news in News.objects.filter(public_date=datetime.today().date()): # filter
+        for user in User.objects.all():
+            print(user.email)
+            send_mail(news.header,
+                      news.description,
+                      'SibDoski-server@yandex.ru',
+                      [user.email],
+                      fail_silently=False,
+                      )
 
 
 @app.task

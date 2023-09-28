@@ -18,7 +18,7 @@ app.conf.beat_schedule = {
     },
     'save_weather_info': {
         'task': 'newspaper.tasks.get_weather_info',
-        'schedule': crontab(minute=config.EMAIL_SEND_MINUTES,
+        'schedule': crontab(minute=config.WEATHER_GET_MINUTES,
                             hour=config.WEATHER_GET_HOUR),
     }
 }
